@@ -56,16 +56,11 @@ function displayBookList() {
     const tbodyEle = document.querySelector("#book-table tbody");
     myLibrary.forEach(book => {
       let trEle = document.createElement("tr");
-      tbodyEle.appendChild(trEle);
-
       let thEle = document.createElement("th");
-      thEle.setAttribute("scope", "row");
-
-      let lastThEle = document.querySelector("th");
-      lastThEle.textContent == count;
-
-      let lastTrEle = document.querySelector("tr");
-      lastTrEle = lastTrEle.appendChild(lastThEle);
+      
+      thEle.textContent = count.toString();
+      tbodyEle.appendChild(trEle);
+      trEle.appendChild(thEle);
 
       for (const prop in book) {
         let tdEle = document.createElement("td");
