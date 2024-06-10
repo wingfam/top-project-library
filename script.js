@@ -31,7 +31,6 @@ function Book(title, author, pages, isRead) {
 
 function addBookToLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
-  // console.log(newBook.showInfo());
   myLibrary.push(newBook);
 }
 
@@ -48,13 +47,37 @@ function displayBookList() {
 
       for (const prop in book) {
         let tdEle = document.createElement("td");
-        console.log(book[prop]);
         tdEle.textContent = book[prop].toString();
         trEle.appendChild(tdEle);
       }
 
       count++;
     });
+}
+
+function showAddNewBookForm() {
+  const newBookForm = document.querySelector("#add-new-book-form");
+  const formClassAtt = newBookForm.getAttribute("class");
+  if (formClassAtt === "close") {
+    newBookForm.setAttribute("class", "show");
+  } else {
+    newBookForm.setAttribute("class", "close");
+  }
+}
+
+function addNewBook() {
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+  const readStatus = document.querySelector('input[name="read-status"]:checked').value;
+  
+  if (readStatus != null) {
+    addBookToLibrary(title, author, pages, readStatus);
+    showAddNewBookForm();
+    alert("New book has been added");
+  } else {
+    alert("Please make sure to select \"Have you read it?\"");
+  }
 }
 
 // Test
@@ -65,7 +88,5 @@ addBookToLibrary(
   "210",
   "not read yet"
 );
-
-myLibrary.forEach(book => console.log(book.title));
 
 displayBookList();
