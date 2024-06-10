@@ -28,32 +28,44 @@
             </tbody>
         </table>
         <!-- The form -->
-        <div class="form-popup" id="myForm">
-            <form action class="form-container">
-                <h1>Add new book</h1>
-                <button type="button">X</button>
-
-                <label for="title"><b>Title</b></label>
-                <input type="text" placeholder="Book title" name="title"
-                    required>
-
-                <label for="author"><b>Author</b></label>
-                <input type="text" placeholder="Author name" name="author"
-                    required>
-
-                <label for="pages"><b>Pages</b></label>
-                <input type="text" placeholder="How many pages?" name="pages"
-                    required>
-
-                <label for="isRead"><b>Read status</b></label>
-                <input type="text" placeholder="Have you read this book?" name="isRead"
-                    required>
-
-                <button type="submit" class="btn">Submit</button>
-                <button type="button" class="btn clear"
-                    onclick="">Clear</button>
-            </form>
-        </div>
+        <form id="add-new-book-form">
+            <fieldset>
+                <legend>Add New Book</legend>
+                <div>
+                    <label for="title"><b>Title</b></label><br>
+                    <input type="text" name="title" id="title"
+                        placeholder="Enter book title" required />
+                    <br><br>
+                </div>
+                <div>
+                    <label for="author"><b>Author</b></label><br>
+                    <input type="text" name="author" id="author"
+                        placeholder="Enter book author" required /><br><br>
+                </div>
+                <div>
+                    <label for="pages"><b>Pages</b></label><br>
+                    <input type="text" name="pages" id="pages"
+                        placeholder="How many pages?" required /><br><br>
+                </div>
+                <div class="read-status">
+                    <label><b>Have you read it?</b></label>
+                    <div class="radio-btn-container">
+                        <input type="radio" id="asnwer-no" name="read-status"
+                            value="no" />
+                        <label for="asnwer-no">No, I haven't</label>
+                    </div>
+                    <div class="radio-btn-container">
+                        <input type="radio" id="answer-yes" name="read-status"
+                            value="yes" />
+                        <label for="answer-yes">Yes, I have</label>
+                    </div>
+                </div>
+                <div class="btn-container">
+                    <button type="submit">Submit</button>
+                    <button type="button">Clear</button>
+                </div>
+            </fieldset>
+        </form>
         <script src="script.js"></script>
     </body>
 </html>

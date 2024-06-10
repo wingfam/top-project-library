@@ -1,3 +1,5 @@
+/* Table */
+
 table {
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
@@ -38,4 +40,43 @@ tfoot th {
 
 tfoot td {
     font-weight: bold;
+}
+
+/* Add new book form */
+
+#add-new-book-form {
+    max-width: 40%;
+    margin: 30px auto;
+}
+
+#add-new-book-form fieldset {
+    padding: 30px;
+}
+
+#add-new-book-form input,
+#add-new-book-form textarea,
+#add-new-book-form button {
+    width: 100%;
+}
+
+#add-new-book-form .read-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 5%;
+}
+
+#add-new-book-form .read-status .radio-btn-container input {
+    width: unset;
+}
+
+#add-new-book-form .btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+#add-new-book-form .btn-container button {
+    width: 20%;
 }
