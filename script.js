@@ -5,7 +5,7 @@ TODO:
 title, author, pages, isRead.
 2 [x]. Create a function that take user's input of each of Book's 
 properties. Then store it in an array.
-3 []. Write a function that loop through the array and displays
+3 [x]. Write a function that loop through the array and displays
 each book on the page (either in table or in their own "card").
 4 []. Create a "New Book" button that bring up a form allowing
 users to input the details of a new book.
@@ -36,22 +36,6 @@ function addBookToLibrary(title, author, pages, isRead) {
 }
 
 function displayBookList() {
-  /*
-    GET the tbody element of table that has id of "book-table"
-    FOR each book object in myLibrary
-      INIT the tr element
-      INIT the th element
-      SET the th scope attribute equal "row"
-      CALL appendChild with tr and th element
-      CALL appendChild with tbody and tr element
-      FOR each property in book object
-        INIT a td element
-        SET td element textcontent to a property
-        CALL appendChild with tr and td element
-      END FOR
-    END FOR
-  */
-
     let count = 1;
     const tbodyEle = document.querySelector("#book-table tbody");
     myLibrary.forEach(book => {

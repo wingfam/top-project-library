@@ -7,7 +7,10 @@
         <title>Local Library</title>
     </head>
     <body>
-
+        <div class="table-header">
+            <label for="book-table">Library</label>
+            <button id="new-book-btn">New Book</button>
+        </div>
         <table id="book-table">
             <caption>
                 Your book collection
@@ -24,6 +27,33 @@
             <tbody>
             </tbody>
         </table>
-    <script src="script.js"></script>
+        <!-- The form -->
+        <div class="form-popup" id="myForm">
+            <form action class="form-container">
+                <h1>Add new book</h1>
+                <button type="button">X</button>
+
+                <label for="title"><b>Title</b></label>
+                <input type="text" placeholder="Book title" name="title"
+                    required>
+
+                <label for="author"><b>Author</b></label>
+                <input type="text" placeholder="Author name" name="author"
+                    required>
+
+                <label for="pages"><b>Pages</b></label>
+                <input type="text" placeholder="How many pages?" name="pages"
+                    required>
+
+                <label for="isRead"><b>Read status</b></label>
+                <input type="text" placeholder="Have you read this book?" name="isRead"
+                    required>
+
+                <button type="submit" class="btn">Submit</button>
+                <button type="button" class="btn clear"
+                    onclick="">Clear</button>
+            </form>
+        </div>
+        <script src="script.js"></script>
     </body>
 </html>

@@ -23,7 +23,7 @@ td {
     padding: 8px 10px;
 }
 
-td:last-of-type, 
+td:last-of-type,
 td:nth-last-child(2) {
     text-align: center;
 }
@@ -34,9 +34,8 @@ tbody>tr:nth-of-type(even) {
 
 tfoot th {
     text-align: right;
-  }
-  
-  tfoot td {
+}
+
+tfoot td {
     font-weight: bold;
-  }
-  
+}
