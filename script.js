@@ -30,7 +30,7 @@ function Book(title, author, pages, isRead) {
   this.isRead = isRead;
 }
 
-function addBookToLibrary(title, author, pages, isRead) {
+function insertBookToMyLibrary(title, author, pages, isRead) {
   const newBook = new Book(title, author, pages, isRead);
   myLibrary.push(newBook);
 }
@@ -58,45 +58,73 @@ function displayLastBook() {
   }
 }
 
-function showAddNewBookForm() {
+function showNewBookDialog() {
   const newBookForm = document.querySelector("#add-new-book-form");
   newBookForm.reset(); // clear form
 }
 
 function addNewBook() {
-  const title = document.querySelector("#title").value;
-  const author = document.querySelector("#author").value;
-  const pages = document.querySelector("#pages").value;
-  const readStatus = document.querySelector('input[name="read-status"]:checked').value;
+  let isAdded = false;
+  const title = document.querySelector("#title");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
+  const readStatus = document.querySelector('input[name="read-status"]:checked');
+  const emptyTableRow = document.querySelector(".empty-table-row");
 
-  if (readStatus != null) {
-    addBookToLibrary(title, author, pages, readStatus);
-    alert("New book has been added");
-    showAddNewBookForm();
-  } else {
-    alert('Please make sure to select "Have you read it?"');
+  if (emptyTableRow != null) {
+    emptyTableRow.remove();
   }
+
+  if (
+    title.value != "" &&
+    author.value != "" &&
+    pages.value != "" &&
+    readStatus != null
+  ) {
+    insertBookToMyLibrary(title.value, author.value, pages.value, readStatus.value);
+    alert("New book has been added");
+    showNewBookDialog();
+    isAdded = true;
+  } else {
+    alert("Please make sure all fields are filled in");
+  }
+
+  return isAdded;
 }
 
 function setup() {
   const newBookBtn = document.querySelector("#new-book-btn");
-  const submitBtn = document.querySelector("#form-submit-btn");
   const closeBtn = document.querySelector("#close-btn");
+  const submitBtn = document.querySelector("#form-submit-btn");
+  const clearBtn = document.querySelector("#form-clear-btn");
   const newBookDialog = document.querySelector("#new-book-dialog");
 
   newBookBtn.addEventListener("click", () => {
     newBookDialog.showModal();
   });
 
-  submitBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    addNewBook();
-    displayLastBook();
+  closeBtn.addEventListener("click", () => {
     newBookDialog.close();
   });
 
-  closeBtn.addEventListener("click", () => {
-    newBookDialog.close();
+  submitBtn.addEventListener("click", (e) => {
+    if (addNewBook()) {
+      displayLastBook();
+      newBookDialog.close();
+    }
+  });
+
+  clearBtn.addEventListener("click", () => {
+    const title = document.querySelector("#title");
+    const author = document.querySelector("#author");
+    const pages = document.querySelector("#pages");
+    const readStatus = document.querySelector('input[name="read-status"]:checked');
+
+    title.value = "";
+    author.value = "";
+    pages.value = "";
+
+    readStatus != null ? (readStatus.checked = false) : null;
   });
 }
 

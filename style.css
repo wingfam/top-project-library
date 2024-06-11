@@ -1,53 +1,84 @@
-/* Table */
+body, html {
+    margin: unset;
+    height: 100%;
+    width: 100%;
+    overflow: scroll;
+    position: relative;
+}
 
-table {
+/* Main content */
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+/* Book Table */
+
+.table-wrapper {
+    margin: unset !important;
+}
+
+.table-header {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#book-table {
     border-collapse: collapse;
     border: 2px solid rgb(140 140 140);
     font-family: sans-serif;
     font-size: 0.8rem;
     letter-spacing: 1px;
+    margin-top: 5%;
 }
 
-caption {
+#book-table caption {
     caption-side: bottom;
     padding: 10px;
     font-weight: bold;
 }
 
-thead,
-tfoot {
+#book-table thead,
+#book-table tfoot {
     background-color: rgb(228 240 245);
 }
 
-th,
-td {
+#book-table th,
+#book-table td {
     border: 1px solid rgb(160 160 160);
     padding: 8px 10px;
 }
 
-td:last-of-type,
-td:nth-last-child(2) {
+#book-table td:last-of-type,
+#book-table td:nth-last-child(2) {
     text-align: center;
 }
 
-tbody>tr:nth-of-type(even) {
+#book-table tbody>tr:nth-of-type(even) {
     background-color: rgb(237 238 242);
 }
 
-tfoot th {
+#book-table tfoot th {
     text-align: right;
 }
 
-tfoot td {
+#book-table tfoot td {
     font-weight: bold;
 }
 
-/* Add new book form */
+#book-table .table-wrapper {
+    margin: auto auto;
+}
+
+/* New Book Dialog*/
 
 #new-book-dialog {
     position: relative;
     border: 1px solid;
-    width: 30%;
+    min-width: 400px;
 }
 
 #add-new-book-form {
