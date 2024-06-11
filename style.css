@@ -44,20 +44,10 @@ tfoot td {
 
 /* Add new book form */
 
-#add-new-book-form {
+#new-book-dialog {
     position: relative;
-    max-width: 30%;
-    margin: 20px auto;
-    background-color: antiquewhite;
     border: 1px solid;
-}
-
-#add-new-book-form.close {
-    display: none;
-}
-
-#add-new-book-form.show {
-    display: block;
+    width: 30%;
 }
 
 #add-new-book-form {
@@ -83,7 +73,7 @@ tfoot td {
 }
 
 #add-new-book-form .read-status .radio-btn-container input,
-#add-new-book-form .close-btn {
+#add-new-book-form #close-btn {
     width: unset;
 }
 
@@ -93,7 +83,11 @@ tfoot td {
     gap: 1em;
 }
 
-#add-new-book-form .close-btn {
+#add-new-book-form .submit-btn-container button {
+    width: 30%;
+}
+
+#add-new-book-form #close-btn {
     position: absolute;
     top: 10px;
     right: 10px;

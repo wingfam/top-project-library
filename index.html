@@ -9,7 +9,7 @@
     <body>
         <div class="table-header">
             <label for="book-table">Library</label>
-            <button id="new-book-btn" onclick="showAddNewBookForm()">New
+            <button id="new-book-btn">New
                 Book</button>
         </div>
         <table id="book-table">
@@ -26,46 +26,55 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
             </tbody>
         </table>
-        <!-- The form -->
-        <form id="add-new-book-form" class="show">
-            <h3 class="form-title">Add New Book</h3>
-            <button type="button" class="close-btn" onclick="showAddNewBookForm()">X</button>
-            <div>
-                <label for="title"><b>Title</b></label><br>
-                <input type="text" name="title" id="title"
-                    placeholder="Enter book title" required />
-                <br><br>
-            </div>
-            <div>
-                <label for="author"><b>Author</b></label><br>
-                <input type="text" name="author" id="author"
-                    placeholder="Enter book author" required /><br><br>
-            </div>
-            <div>
-                <label for="pages"><b>Pages</b></label><br>
-                <input type="text" name="pages" id="pages"
-                    placeholder="How many pages?" required /><br><br>
-            </div>
-            <div class="read-status">
-                <label><b>Have you read it?</b></label>
-                <div class="radio-btn-container">
-                    <input type="radio" id="asnwer-no" name="read-status"
-                        value="no" />
-                    <label for="asnwer-no">No, I haven't</label>
+        <!-- The dialog form -->
+        <dialog id="new-book-dialog">
+            <form id="add-new-book-form">
+                <h3 class="form-title">Add New Book</h3>
+                <button type="button" id="close-btn">X</button>
+                <div>
+                    <label for="title"><b>Title</b></label><br>
+                    <input type="text" name="title" id="title"
+                        placeholder="Enter book title" required />
+                    <br><br>
                 </div>
-                <div class="radio-btn-container">
-                    <input type="radio" id="answer-yes" name="read-status"
-                        value="yes" />
-                    <label for="answer-yes">Yes, I have</label>
+                <div>
+                    <label for="author"><b>Author</b></label><br>
+                    <input type="text" name="author" id="author"
+                        placeholder="Enter book author" required /><br><br>
                 </div>
-            </div>
-            <div class="submit-btn-container">
-                <button type="submit" onclick="addNewBook()">Submit</button>
-                <button type="reset">Clear</button>
-            </div>
-        </form>
+                <div>
+                    <label for="pages"><b>Pages</b></label><br>
+                    <input type="text" name="pages" id="pages"
+                        placeholder="How many pages?" required /><br><br>
+                </div>
+                <div class="read-status">
+                    <label><b>Have you read it?</b></label>
+                    <div class="radio-btn-container">
+                        <input type="radio" id="asnwer-no" name="read-status"
+                            value="no" />
+                        <label for="asnwer-no">No, I haven't</label>
+                    </div>
+                    <div class="radio-btn-container">
+                        <input type="radio" id="answer-yes" name="read-status"
+                            value="yes" />
+                        <label for="answer-yes">Yes, I have</label>
+                    </div>
+                </div>
+                <div class="submit-btn-container">
+                    <button type="submit" id="form-submit-btn">Submit</button>
+                    <button type="reset">Clear</button>
+                </div>
+            </form>
+        </dialog>
         <script src="script.js"></script>
     </body>
 </html>

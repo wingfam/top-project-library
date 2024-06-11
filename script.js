@@ -7,7 +7,7 @@ title, author, pages, isRead.
 properties. Then store it in an array.
 3 [x]. Write a function that loop through the array and displays
 each book on the page (either in table or in their own "card").
-4 []. Create a "New Book" button that bring up a form allowing
+4 [x]. Create a "New Book" button that bring up a form allowing
 users to input the details of a new book.
 5 []. Add a button on each book's display to remove the book
 from the library (need to associate the DOM element with the
@@ -20,6 +20,7 @@ the Book prototype instance)
 */
 
 const myLibrary = [];
+const newBookDialog = document.querySelector("#new-book-dialog");
 
 function Book(title, author, pages, isRead) {
   // constructor
@@ -34,35 +35,32 @@ function addBookToLibrary(title, author, pages, isRead) {
   myLibrary.push(newBook);
 }
 
-function displayBookList() {
-    let count = 1;
-    const tbodyEle = document.querySelector("#book-table tbody");
-    myLibrary.forEach(book => {
-      let trEle = document.createElement("tr");
-      let thEle = document.createElement("th");
-      
-      thEle.textContent = count.toString();
-      tbodyEle.appendChild(trEle);
-      trEle.appendChild(thEle);
+function displayLastBook() {
+  const tbodyEle = document.querySelector("#book-table tbody");
+  const lastBook = myLibrary.at(-1);
 
-      for (const prop in book) {
-        let tdEle = document.createElement("td");
-        tdEle.textContent = book[prop].toString();
-        trEle.appendChild(tdEle);
-      }
+  const trEle = document.createElement("tr");
+  const thEle = document.createElement("th");
 
-      count++;
-    });
+  // increase the index of last book by 1
+  // act as book number when display in table
+  let bookNumber = myLibrary.indexOf(lastBook);
+  bookNumber = bookNumber + 1;
+  thEle.textContent = bookNumber.toString();
+
+  tbodyEle.appendChild(trEle);
+  trEle.appendChild(thEle);
+
+  for (const prop in lastBook) {
+    const tdEle = document.createElement("td");
+    tdEle.textContent = lastBook[prop].toString();
+    trEle.appendChild(tdEle);
+  }
 }
 
 function showAddNewBookForm() {
   const newBookForm = document.querySelector("#add-new-book-form");
-  const formClassAtt = newBookForm.getAttribute("class");
-  if (formClassAtt === "close") {
-    newBookForm.setAttribute("class", "show");
-  } else {
-    newBookForm.setAttribute("class", "close");
-  }
+  newBookForm.reset(); // clear form
 }
 
 function addNewBook() {
@@ -70,23 +68,36 @@ function addNewBook() {
   const author = document.querySelector("#author").value;
   const pages = document.querySelector("#pages").value;
   const readStatus = document.querySelector('input[name="read-status"]:checked').value;
-  
+
   if (readStatus != null) {
     addBookToLibrary(title, author, pages, readStatus);
-    showAddNewBookForm();
     alert("New book has been added");
+    showAddNewBookForm();
   } else {
-    alert("Please make sure to select \"Have you read it?\"");
+    alert('Please make sure to select "Have you read it?"');
   }
 }
 
-// Test
-addBookToLibrary("Dune", "Frank Herbert", "896", "not read yet");
-addBookToLibrary(
-  "Do Androids Dream of Electric Sheep?",
-  "Phillip K, Dick",
-  "210",
-  "not read yet"
-);
+function setup() {
+  const newBookBtn = document.querySelector("#new-book-btn");
+  const submitBtn = document.querySelector("#form-submit-btn");
+  const closeBtn = document.querySelector("#close-btn");
+  const newBookDialog = document.querySelector("#new-book-dialog");
 
-displayBookList();
+  newBookBtn.addEventListener("click", () => {
+    newBookDialog.showModal();
+  });
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    addNewBook();
+    displayLastBook();
+    newBookDialog.close();
+  });
+
+  closeBtn.addEventListener("click", () => {
+    newBookDialog.close();
+  });
+}
+
+setup();
