@@ -26,12 +26,11 @@
                             <th scope="col">Title</th>
                             <th scope="col">Author</th>
                             <th scope="col">Pages</th>
-                            <th scope="col">Have you read it?</th>
+                            <th scope="col">Read Status</th>
                             <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-
                     </tbody>
                 </table>
             </div>
@@ -43,8 +42,7 @@
                     <div>
                         <label for="title"><b>Title</b></label><br>
                         <input type="text" name="title" id="title"
-                            placeholder="Enter book title" required />
-                        <br><br>
+                            placeholder="Enter book title" required /><br><br>
                     </div>
                     <div>
                         <label for="author"><b>Author</b></label><br>
@@ -59,16 +57,22 @@
                     <div class="read-status">
                         <label><b>Have you read it?</b></label>
                         <div class="radio-btn-container">
-                            <input type="radio" id="asnwer-no"
+                            <input type="radio" id="not-started-rd"
                                 name="read-status"
-                                value="No, I haven't" />
-                            <label for="asnwer-no">No, I haven't</label>
+                                value="Not started" />
+                            <label for="not-started-rd">Not started</label>
                         </div>
                         <div class="radio-btn-container">
-                            <input type="radio" id="answer-yes"
+                            <input type="radio" id="reading-rd"
                                 name="read-status"
-                                value="Yes, I have" required />
-                            <label for="answer-yes">Yes, I have</label>
+                                value="Reading" required />
+                            <label for="reading-rd">Reading</label>
+                        </div>
+                        <div class="radio-btn-container">
+                            <input type="radio" id="done-rd"
+                                name="read-status"
+                                value="Done" required />
+                            <label for="done-rd">Done</label>
                         </div>
                     </div>
                     <div class="submit-btn-container">
