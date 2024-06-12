@@ -157,14 +157,13 @@ function setup() {
   const submitBtn = document.querySelector("#form-submit-btn");
   const clearBtn = document.querySelector("#form-clear-btn");
   const newBookDialog = document.querySelector("#new-book-dialog");
+  const loadTemplateBtn = document.querySelector("#load-template-btn");
 
   newBookBtn.addEventListener("click", () => newBookDialog.showModal());
-
   closeBtn.addEventListener("click", () => newBookDialog.close());
-
   submitBtn.addEventListener("click", () => submitForm());
-
   clearBtn.addEventListener("click", () => clearForm());
+  loadTemplateBtn.addEventListener("click", () => loadTemplate());
 }
 
 setup();
