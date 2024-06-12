@@ -11,8 +11,10 @@
             <div class="table-wrapper">
                 <div class="table-header">
                     <label for="book-table">Library</label>
-                    <button id="new-book-btn">New
-                        Book</button>
+                    <div>
+                        <button id="new-book-btn">New Book</button>
+                        <button id="load-template-btn">Load Template</button>
+                    </div>
                 </div>
                 <table id="book-table">
                     <caption>
@@ -25,16 +27,11 @@
                             <th scope="col">Author</th>
                             <th scope="col">Pages</th>
                             <th scope="col">Have you read it?</th>
+                            <th scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="empty-table-row">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -62,18 +59,21 @@
                     <div class="read-status">
                         <label><b>Have you read it?</b></label>
                         <div class="radio-btn-container">
-                            <input type="radio" id="asnwer-no" name="read-status"
+                            <input type="radio" id="asnwer-no"
+                                name="read-status"
                                 value="No, I haven't" />
                             <label for="asnwer-no">No, I haven't</label>
                         </div>
                         <div class="radio-btn-container">
-                            <input type="radio" id="answer-yes" name="read-status"
+                            <input type="radio" id="answer-yes"
+                                name="read-status"
                                 value="Yes, I have" required />
                             <label for="answer-yes">Yes, I have</label>
                         </div>
                     </div>
                     <div class="submit-btn-container">
-                        <button type="button" id="form-submit-btn">Submit</button>
+                        <button type="button"
+                            id="form-submit-btn">Submit</button>
                         <button type="button" id="form-clear-btn">Clear</button>
                     </div>
                 </form>

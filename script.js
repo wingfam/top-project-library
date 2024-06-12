@@ -20,6 +20,7 @@ the Book prototype instance)
 */
 
 const myLibrary = [];
+const tableHead = ["No.", "Title", "Author", "Pages", "Have you read it?", "Actions"];
 const newBookDialog = document.querySelector("#new-book-dialog");
 
 function Book(title, author, pages, isRead) {
@@ -36,26 +37,54 @@ function insertBookToMyLibrary(title, author, pages, isRead) {
 }
 
 function displayLastBook() {
-  const tbodyEle = document.querySelector("#book-table tbody");
   const lastBook = myLibrary.at(-1);
+  insertNewRow(lastBook);
+}
 
+function removeBookAtIndex(element) {
+  rowIndex = element.parentNode.rowIndex;
+  myLibrary.splice(rowIndex - 1, 1);
+  updateTableDisplay();
+}
+
+function updateTableDisplay() {
+  const tableRows = document.querySelectorAll("#book-table tbody tr");
+
+  tableRows.forEach((element) => {
+    element.remove();
+  });
+
+  myLibrary.forEach((book) => {
+    insertNewRow(book);
+  });
+}
+
+function insertNewRow(book) {
+  const tbodyEle = document.querySelector("#book-table tbody");
   const trEle = document.createElement("tr");
   const thEle = document.createElement("th");
 
   // increase the index of last book by 1
   // act as book number when display in table
-  let bookNumber = myLibrary.indexOf(lastBook);
-  bookNumber = bookNumber + 1;
+  let bookNumber = myLibrary.indexOf(book) + 1;
   thEle.textContent = bookNumber.toString();
-
-  tbodyEle.appendChild(trEle);
   trEle.appendChild(thEle);
 
-  for (const prop in lastBook) {
+  for (const prop in book) {
     const tdEle = document.createElement("td");
-    tdEle.textContent = lastBook[prop].toString();
+    tdEle.textContent = book[prop].toString();
     trEle.appendChild(tdEle);
   }
+
+  const actionTdEle = document.createElement("td");
+  const removeBtn = document.createElement("button");
+
+  removeBtn.textContent = "Remove";
+  removeBtn.addEventListener("click", () => removeBookAtIndex(actionTdEle));
+
+  tbodyEle.appendChild(trEle);
+  trEle.appendChild(actionTdEle);
+  actionTdEle.appendChild(removeBtn);
 }
 
 function showNewBookDialog() {
@@ -63,7 +92,7 @@ function showNewBookDialog() {
   newBookForm.reset(); // clear form
 }
 
-function addNewBook() {
+function addNewBookFromInput() {
   let isAdded = false;
   const title = document.querySelector("#title");
   const author = document.querySelector("#author");
@@ -92,6 +121,36 @@ function addNewBook() {
   return isAdded;
 }
 
+function loadTemplate() {
+  insertBookToMyLibrary("new book 1", "minh", "10", "No, I haven't");
+  insertBookToMyLibrary("new book 2", "minh", "15", "Yes, I have");
+  insertBookToMyLibrary("new book 3", "minh", "10", "No, I haven't");
+
+  myLibrary.forEach((book) => {
+    insertNewRow(book);
+  });
+}
+
+function clearForm() {
+  const title = document.querySelector("#title");
+  const author = document.querySelector("#author");
+  const pages = document.querySelector("#pages");
+  const readStatus = document.querySelector('input[name="read-status"]:checked');
+
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+
+  readStatus != null ? (readStatus.checked = false) : null;
+}
+
+function submitForm() {
+  if (addNewBookFromInput()) {
+    displayLastBook();
+    newBookDialog.close();
+  }
+}
+
 function setup() {
   const newBookBtn = document.querySelector("#new-book-btn");
   const closeBtn = document.querySelector("#close-btn");
@@ -99,33 +158,15 @@ function setup() {
   const clearBtn = document.querySelector("#form-clear-btn");
   const newBookDialog = document.querySelector("#new-book-dialog");
 
-  newBookBtn.addEventListener("click", () => {
-    newBookDialog.showModal();
-  });
+  newBookBtn.addEventListener("click", () => newBookDialog.showModal());
 
-  closeBtn.addEventListener("click", () => {
-    newBookDialog.close();
-  });
+  closeBtn.addEventListener("click", () => newBookDialog.close());
 
-  submitBtn.addEventListener("click", (e) => {
-    if (addNewBook()) {
-      displayLastBook();
-      newBookDialog.close();
-    }
-  });
+  submitBtn.addEventListener("click", () => submitForm());
 
-  clearBtn.addEventListener("click", () => {
-    const title = document.querySelector("#title");
-    const author = document.querySelector("#author");
-    const pages = document.querySelector("#pages");
-    const readStatus = document.querySelector('input[name="read-status"]:checked');
-
-    title.value = "";
-    author.value = "";
-    pages.value = "";
-
-    readStatus != null ? (readStatus.checked = false) : null;
-  });
+  clearBtn.addEventListener("click", () => clearForm());
 }
 
 setup();
+
+loadTemplate();
