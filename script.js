@@ -30,12 +30,12 @@ function Book(title, author, pages, readStatus) {
   this.readStatus = readStatus;
 
   this.toggleReadStatus = function () {
-    if (this.readStatus == "Not started") {
-      this.readStatus = "Reading";
-    } else if (this.readStatus == "Reading") {
-      this.readStatus = "Done";
-    } else if (this.readStatus == "Done") {
-      this.readStatus = "Not started";
+    if (this.readStatus == 1) {
+      this.readStatus = 2;
+    } else if (this.readStatus == 2) {
+      this.readStatus = 3;
+    } else if (this.readStatus == 3) {
+      this.readStatus = 1;
     }
   };
 }
@@ -53,11 +53,7 @@ function removeBookAtIndex(element) {
 
 function changeReadStatus(book, element) {
   book.toggleReadStatus();
-  const rowIndex = element.parentNode.rowIndex;
-  const statusColumn = document.querySelector(
-    "table tbody tr:nth-child(" + rowIndex + ") td:nth-child(5)"
-  );
-  displayReadStatus(book, statusColumn);
+  displayReadStatus(book, element);
 }
 
 function displayLastBook() {
@@ -82,10 +78,15 @@ function updateTableDisplay() {
   });
 }
 
-function displayReadStatus(book, statusColumn) {
-  if (book["readStatus"] == "Not started") {
+function displayReadStatus(book, element) {
+  const rowIndex = element.parentNode.rowIndex;
+  const statusColumn = document.querySelector(
+    "table tbody tr:nth-child(" + rowIndex + ") td:nth-child(5)"
+  );
+
+  if (book["readStatus"] == 1) {
     statusColumn.textContent = "Not started";
-  } else if (book["readStatus"] == "2") {
+  } else if (book["readStatus"] == 2) {
     statusColumn.textContent = "Reading";
   } else if (book["readStatus"] == 3) {
     statusColumn.textContent = "Done";
@@ -123,8 +124,17 @@ function insertNewRow(book) {
     // when the loop reach toggleReadStatus function,
     // it won't add to the table and continue to next the prop
     if (prop === "toggleReadStatus") continue;
+
+    const setReadStatus = function (book) {
+      if (book[prop] == 1) return "Not started";
+      else if (book[prop] == 2) return "Reading";
+      else if (book[prop] == 3) return "Done";
+    };
+
     const tdEle = document.createElement("td");
-    tdEle.textContent = book[prop].toString();
+    prop == "readStatus"
+      ? (tdEle.textContent = setReadStatus(book))
+      : (tdEle.textContent = book[prop]);
     trEle.appendChild(tdEle);
   }
 
