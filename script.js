@@ -1,24 +1,3 @@
-/*  
-
-TODO:
-1 [x]. Create a Book function that has 4 properties: 
-title, author, pages, isRead.
-2 [x]. Create a function that take user's input of each of Book's 
-properties. Then store it in an array.
-3 [x]. Write a function that loop through the array and displays
-each book on the page (either in table or in their own "card").
-4 [x]. Create a "New Book" button that bring up a form allowing
-users to input the details of a new book.
-5 [x]. Add a button on each book's display to remove the book
-from the library (need to associate the DOM element with the
-actual book object. One solution is add a data-attribute
-that corresponds to the index of the library array).
-6 [X]. Add a button to change isRead status of each book.
-(create a function that toggles a book's isRead status on 
-the Book prototype instance)
-
-*/
-
 const myLibrary = [];
 const newBookDialog = document.querySelector("#new-book-dialog");
 
@@ -68,29 +47,17 @@ function showNewBookDialog() {
 
 function updateTableDisplay() {
   const tableRows = document.querySelectorAll("#book-table tbody tr");
-
-  tableRows.forEach((element) => {
-    element.remove();
-  });
-
-  myLibrary.forEach((book) => {
-    insertNewRow(book);
-  });
+  tableRows.forEach((element) => element.remove());
+  myLibrary.forEach((book) => insertNewRow(book));
 }
 
 function displayReadStatus(book, element) {
   const rowIndex = element.parentNode.rowIndex;
+  // Select the fifth table column of the current chosen table row
   const statusColumn = document.querySelector(
     "table tbody tr:nth-child(" + rowIndex + ") td:nth-child(5)"
   );
-
-  if (book["readStatus"] == 1) {
-    statusColumn.textContent = "Not started";
-  } else if (book["readStatus"] == 2) {
-    statusColumn.textContent = "Reading";
-  } else if (book["readStatus"] == 3) {
-    statusColumn.textContent = "Done";
-  }
+  statusColumn.textContent = setReadStatus(book);
 }
 
 function submitForm() {
@@ -104,10 +71,16 @@ function loadTemplate() {
   if (myLibrary.length == 0) {
     insertBookToMyLibrary("new book 1", "minh", "10", 1);
     insertBookToMyLibrary("new book 2", "minh", "15", 2);
-    insertBookToMyLibrary("new book 3", "minh", "10", 3);
+    insertBookToMyLibrary("new book 3", "minh", "20", 3);
     updateTableDisplay();
   }
 }
+
+const setReadStatus = function (book) {
+  if (book["readStatus"] == 1) return "Not started";
+  else if (book["readStatus"] == 2) return "Reading";
+  else if (book["readStatus"] == 3) return "Done";
+};
 
 function insertNewRow(book) {
   const tbodyEle = document.querySelector("#book-table tbody");
@@ -124,12 +97,6 @@ function insertNewRow(book) {
     // when the loop reach toggleReadStatus function,
     // it won't add to the table and continue to next the prop
     if (prop === "toggleReadStatus") continue;
-
-    const setReadStatus = function (book) {
-      if (book[prop] == 1) return "Not started";
-      else if (book[prop] == 2) return "Reading";
-      else if (book[prop] == 3) return "Done";
-    };
 
     const tdEle = document.createElement("td");
     prop == "readStatus"
@@ -213,5 +180,3 @@ function setup() {
 }
 
 setup();
-
-loadTemplate();
