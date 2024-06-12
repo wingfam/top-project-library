@@ -71,7 +71,7 @@ function loadTemplate() {
   if (myLibrary.length == 0) {
     insertBookToMyLibrary("new book 1", "minh", "10", 1);
     insertBookToMyLibrary("new book 2", "minh", "15", 2);
-    insertBookToMyLibrary("new book 3", "minh", "20", 3);
+    insertBookToMyLibrary("new book 3 that can wrap around the cell", "minh", "20", 3);
     updateTableDisplay();
   }
 }

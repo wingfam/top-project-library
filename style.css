@@ -73,6 +73,15 @@ body, html {
     margin: auto auto;
 }
 
+#book-table tbody td:nth-child(2) {
+    max-width: 150px;
+    overflow-wrap: break-word;
+}
+
+#book-table tbody td:nth-child(6) button {
+    margin: 5px;
+}
+
 /* New Book Dialog*/
 
 #new-book-dialog {
