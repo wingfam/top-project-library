@@ -1,14 +1,15 @@
 const myLibrary = [];
 const newBookDialog = document.querySelector("#new-book-dialog");
 
-function Book(title, author, pages, readStatus) {
-  // constructor
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.readStatus = readStatus;
+class Book {
+  constructor(title, author, pages, readStatus) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+  }
 
-  this.toggleReadStatus = function () {
+  toggleReadStatus() {
     if (this.readStatus == 1) {
       this.readStatus = 2;
     } else if (this.readStatus == 2) {
@@ -16,7 +17,7 @@ function Book(title, author, pages, readStatus) {
     } else if (this.readStatus == 3) {
       this.readStatus = 1;
     }
-  };
+  }
 }
 
 function insertBookToMyLibrary(title, author, pages, readStatus) {
